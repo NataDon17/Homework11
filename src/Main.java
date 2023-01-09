@@ -10,19 +10,27 @@ public class Main {
             System.out.println(year+" не является високосным.");
         }
     }
-    public static void giveIndicationClient (int clientOS, int clientDeviceYear) {
+
+    public static boolean isDeviceOld (int deviceYear) {
+        int currentYear = LocalDate.now().getYear();
+        return deviceYear<currentYear;
+    }
+    public static void giveIndicationClient (int clientOS, int clienDeviceYear) {
+        boolean deviceOld = isDeviceOld(clienDeviceYear);
+        System.out.print("Установите ");
+        if (deviceOld) {
+            System.out.print("облегченную ");
+        } else {
+            System.out.print("обычную ");
+        }
+        System.out.print("версию приложения ");
         if (clientOS == 0) {
-            if (clientDeviceYear > 2015) {
-                System.out.println("Установите версию приложения для iOS по ссылке.");
-            } else {
-                System.out.println("Установите облегченную версию приложения для iOS по ссылке.");
-            }
-        } else if (clientDeviceYear>2015) {
-            System.out.println("Установите версию приложения для Android по ссылке.");
-        } else{
-            System.out.println("Установите облегченную версию приложения для Android по ссылке.");
+            System.out.println("для iOS по ссылке.");
+        } else {
+            System.out.println("для Android по ссылке.");
         }
     }
+
 
     public static int calculationDeliveryDays (int distance){
         int day = 1;
@@ -45,9 +53,7 @@ public class Main {
         calculationLeapYear(year);
 
         System.out.println("Задача 2");
-        int clientOS=0;
-        int currentYear = LocalDate.now().getYear();
-        giveIndicationClient(clientOS, currentYear);
+        giveIndicationClient(1, 2023);
 
         System.out.println("Задача 3");
         int deliveryDistance = 120;
